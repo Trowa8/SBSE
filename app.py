@@ -24,7 +24,6 @@ with open("SB_publication_PMC.csv", encoding="utf-8") as f:
             "link": row[link_key].strip()
         })
 
-
 @app.route("/", methods=["GET", "POST"])
 def search():
     query = request.form.get("query", request.args.get("query", "")).lower().strip()

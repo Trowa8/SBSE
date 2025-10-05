@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+
+
+ <title>Пошук експеримента</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Пошук експеримента</h1>
+    <form method="get" action="{{ url_for('search') }}">
+      <input type="text" name="query" placeholder="Введіть назву експеримента" value="{{ query }}">
+      <input type="submit" value="Шукати">
+    </form>
+
+    {% if results %}
+      <h2>Результати ({{ total_results }}):</h2>
+      <ul class="results">
+        {% for exp in results %}
+          <li><a href="{{ url_for('open_link', item_id=(page-1)*20 + loop.index0) }}">{{ exp.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      {% if total_pages > 1 %}
+      <div class="pagination">
+        {% if page > 1 %}
+          <a href="{{ url_for('search') }}?query={{ query }}&page={{ page - 1 }}">&laquo; Попередня</a>
+        {% endif %}
+
+        <a href="{{ url_for('search') }}?query={{ query }}&page=1" {% if page == 1 %}class="current"{% endif %}>1</a>
+
+        {% if page > 3 %}
+          <span>...</span>
+        {% endif %}
+
+        {% if page > 2 %}
+          <a href="{{ url_for('search') }}?query={{ query }}&page={{ page - 1 }}">{{ page - 1 }}</a>
+        {% endif %}
+
+        {% if page != 1 and page != total_pages %}
+          <span class="current">{{ page }}</span>
+        {% endif %}
+
+        {% if page < total_pages - 1 %}
+          <a href="{{ url_for('search') }}?query={{ query }}&page={{ page + 1 }}">{{ page + 1 }}</a>
+        {% endif %}
+
+        {% if page < total_pages - 2 %}
+          <span>...</span>
+        {% endif %}
+
+        {% if total_pages > 1 %}
+          <a href="{{ url_for('search') }}?query={{ query }}&page={{ total_pages }}" {% if page == total_pages %}class="current"{% endif %}>{{ total_pages }}</a>
+        {% endif %}
+
+        {% if page < total_pages %}
+          <a href="{{ url_for('search') }}?query={{ query }}&page={{ page + 1 }}">Наступна &raquo;</a>
+        {% endif %}
+      </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
